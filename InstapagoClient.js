@@ -1,5 +1,7 @@
 'use strict'
-
+/**
+ * Main Class
+ */
 class InstaPago {
 
 	/**
