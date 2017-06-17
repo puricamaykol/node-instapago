@@ -1,9 +1,11 @@
-# node-instapago
+# Node Instapago
 Simple Instapago Client for NodeJs (On the works, still barebones... )
 
 Methods
--createPayment()
--preAuthorizePayment()
--completePayment()
--getPaymentDetails()
--cancelPayment()
+ - createPayment( )
+ - preAuthorizePayment( )
+ - completePayment( )
+ - getPaymentDetails( )
+ - cancelPayment( )
+
+
