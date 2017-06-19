@@ -15,7 +15,7 @@ class InstaPago {
 
 
     createPayment(paymentParameters) {
-    	paymentAttrs = {}
+        paymentAttrs = {}
         paymentAttrs.amount = paymentParameters.amount
         paymentAttrs.description = paymentParameters.description
         paymentAttrs.cardHolder = paymentParameters.cardHolder
@@ -30,11 +30,11 @@ class InstaPago {
         paymentAttrs.city = paymentParameters.city
         paymentAttrs.zipCode = paymentParameters.zipCode
         paymentAttrs.state = paymentParameters.state
-        try{
-        paymentObject = new Payment(paymentAttrs);
-    	}catch(err){
-    		return err;
-    	}
+        try {
+            paymentObject = new Payment(paymentAttrs);
+        } catch (err) {
+            return err;
+        }
 
 
     }
@@ -57,7 +57,7 @@ class InstaPago {
 }
 /*Using contruct proxy method for some IoC
   Note: This cannot be used as an IoC container creation aproach
-  At least I haven't come up with a way for doing such thing	
+  At least I haven't come up with a way for doing such thing    
 */
 var instapago = new Proxy(InstaPago, {
     construct: function(target, argumentsList, newTarget) {
