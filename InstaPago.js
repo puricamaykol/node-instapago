@@ -30,8 +30,11 @@ class InstaPago {
         paymentAttrs.city = paymentParameters.city
         paymentAttrs.zipCode = paymentParameters.zipCode
         paymentAttrs.state = paymentParameters.state
-
+        try{
         paymentObject = new Payment(paymentAttrs);
+    	}catch(err){
+    		return err;
+    	}
 
 
     }
