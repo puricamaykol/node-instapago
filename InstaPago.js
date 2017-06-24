@@ -13,7 +13,12 @@ class InstaPago {
         this._http = http;
     }
 
-
+    /**
+     * Creates or preauthorized a payment
+     * @param  {json]}  paymentParameters Set of params for payment creation
+     * @param  {Boolean} ispreAuthorized   Sets if it's preauthorized or not
+     * @return {Promise}  
+     */
     createPayment(paymentParameters, ispreAuthorized=false) {
         let paymentAttrs = {
             "KeyId": this._KeyId,
@@ -36,7 +41,11 @@ class InstaPago {
         }
         return this._http.post('/payment', paymentAttrs);
     }
-
+    /**
+     * Completes a pre-authorized payment
+     * @param  {json} paPaymentParameters Payment params (Id and Amount)
+     * @return {Promise}
+     */
     completePayment(paPaymentParameters) {
     	let paymentAttrs = {
             "KeyId": this._KeyId,
@@ -46,7 +55,11 @@ class InstaPago {
         }
         return this._http.post('/complete', paymentAttrs);
     }
-
+    /**
+     * Gets the details for a given payment
+     * @param  {json} paymentParameters Payment object containing payment id
+     * @return {Promise}
+     */
     getPaymentDetails(paymentParameters) {
     	let paymentAttrs = {
             "KeyId": this._KeyId,
@@ -56,7 +69,11 @@ class InstaPago {
         return this._http('/payment?KeyId='+paymentAttrs.KeyId+'&PublicKeyId='+paymentAttrs.PublicKeyId+'&Id='+paymentParameters.Id);
 
     }
-
+    /**
+     * Cancels a given payment
+     * @param  {json} paymentParameters paymentParameters Payment object containing payment id
+     * @return {Promise}
+     */
     cancelPayment(paymentParameters) {
     	let paymentAttrs = {
             "KeyId": this._KeyId,
