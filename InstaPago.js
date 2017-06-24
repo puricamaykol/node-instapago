@@ -1,6 +1,6 @@
 'use strict'
-var request = require('request');
-var Payment = require('./Payment');
+var axios = require('axios');
+var qa = require('qs');
 
 /**
  * Main Class
@@ -14,45 +14,56 @@ class InstaPago {
     }
 
 
-    createPayment(paymentParameters) {
-    	paymentAttrs = {}
-        paymentAttrs.amount = paymentParameters.amount
-        paymentAttrs.description = paymentParameters.description
-        paymentAttrs.cardHolder = paymentParameters.cardHolder
-        paymentAttrs.cardHolderId = paymentParameters.cardHolderId
-        paymentAttrs.cardNumber = paymentParameters.cardNumber
-        paymentAttrs.cvc = paymentParameters.cvc
-        paymnetAttrs.paymentParameters.expirationDate
-        paymentAttrs.statusId = paymentParameters.statusId
-        paymentAttrs.ip = paymentParameters.ip
-        paymentAttrs.orderNumber = paymentParameters.orderNumber
-        paymentAttrs.address = paymentParameters.address
-        paymentAttrs.city = paymentParameters.city
-        paymentAttrs.zipCode = paymentParameters.zipCode
-        paymentAttrs.state = paymentParameters.state
-        try{
-        paymentObject = new Payment(paymentAttrs);
-    	}catch(err){
-    		return err;
-    	}
+    createPayment(paymentParameters, ispreAuthorized=false) {
+        let paymentAttrs = {
+            "KeyId": this._KeyId,
+            "PublicKeyId": this._PublicKeyId,
+            "Amount": paymentParameters.amount,
+            "Description": paymentParameters.description,
+            "CardHolder": paymentParameters.cardHolder,
+            "CardHolderID": paymentParameters.cardHolderId,
+            "CardNumber": paymentParameters.cardNumber,
+            "CVC": paymentParameters.cvc,
+            "ExpirationDate": paymentParameters.expirationDate,
+            "StatusId": (ispreAuthorized) ? 1 : 2,
+            "IP": paymentParameters.ip,
+            "OrderNumber": paymentParameters.orderNumber,
+            "Address": paymentParameters.address,
+            "City": paymentParameters.city,
+            "ZipCode": paymentParameters.zipCode,
+            "State": paymentParameters.state
 
+        }
+        return this._http.post('/payment', paymentAttrs);
+    }
+
+    completePayment(paPaymentParameters) {
+    	let paymentAttrs = {
+            "KeyId": this._KeyId,
+            "PublicKeyId": this._PublicKeyId,
+            "Id": paPaymentParameters.Id,
+            "Amount": paPaymentParameters.amount
+        }
+        return this._http.post('/complete', paymentAttrs);
+    }
+
+    getPaymentDetails(paymentParameters) {
+    	let paymentAttrs = {
+            "KeyId": this._KeyId,
+            "PublicKeyId": this._PublicKeyId,
+            "Id": paymentParameters.Id
+        }
+        return this._http('/payment?KeyId='+paymentAttrs.KeyId+'&PublicKeyId='+paymentAttrs.PublicKeyId+'&Id='+paymentParameters.Id);
 
     }
 
-    preAuthorizePayment() {
-
-    }
-
-    completePayment() {
-
-    }
-
-    getPaymentDetails() {
-
-    }
-
-    cancelPayment() {
-
+    cancelPayment(paymentParameters) {
+    	let paymentAttrs = {
+            "KeyId": this._KeyId,
+            "PublicKeyId": this._PublicKeyId,
+            "Id": paymentParameters.Id
+        }
+        return this._http.delete('/payment?KeyId='+paymentAttrs.KeyId+'&PublicKeyId='+paymentAttrs.PublicKeyId+'&Id='+paymentParameters.Id);
     }
 }
 /*Using contruct proxy method for some IoC
@@ -61,7 +72,24 @@ class InstaPago {
 */
 var instapago = new Proxy(InstaPago, {
     construct: function(target, argumentsList, newTarget) {
-        return new target(argumentsList[0], argumentsList[1], request);
+        var httpClient = axios.create({
+            baseURL: 'https://api.instapago.com/',
+            headers: {
+                'Cache-Control': 'no-cache',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+            },
+            transformRequest: [function(obj) {
+                var str = [];
+                for (var p in obj)
+                    if (obj.hasOwnProperty(p)) {
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    }
+                return str.join("&");
+            }],
+
+        });
+        return new target(argumentsList[0], argumentsList[1], httpClient);
     }
 });
 

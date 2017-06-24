@@ -4,6 +4,8 @@
   "description": "Simple Instapago Client for NodeJs",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.16.2",
+    "qs": "^6.4.0",
     "request": "^2.81.0"
   },
   "devDependencies": {},
