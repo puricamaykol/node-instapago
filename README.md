@@ -13,9 +13,9 @@ How to use it:
   
 var paymentPAHandler = function(params)
 {
-    _instaPago.completePayment(params).then(res=>console.log("res.data", "resputa completePayment")).catch(err=>console.log(err, "completePayment error"));
-    _instaPago.getPaymentDetails(params).then(res=>console.log("res.data", "resputa getPaymentDetails")).catch(err=>console.log(err, "completePayment error"));
-    _instaPago.cancelPayment(params).then(res=>console.log(res, "resputa cancelPayment")).catch(err=>console.log(err, "completePayment error"));
+    _instaPago.completePayment(params).then(res=>console.log("res.data")).catch(err=>console.log(err, "completePayment error"));
+    _instaPago.getPaymentDetails(params).then(res=>console.log("res.data")).catch(err=>console.log(err, "completePayment error"));
+    _instaPago.cancelPayment(params).then(res=>console.log(res.data)).catch(err=>console.log(err, "completePayment error"));
 }
 eventEmitter.on('paymentPA', paymentPAHandler);
 
