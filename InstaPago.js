@@ -63,7 +63,7 @@ class InstaPago {
             "PublicKeyId": this._PublicKeyId,
             "Id": paymentParameters.Id
         }
-        return this._http.delete('/payment?KeyId='+paymentAttrs.KeyId+'&PublicKeyId='+paymentAttrs.PublicKeyId+'&Id='+paymentParameters.Id);
+        return this._http.delete('/payment',{"data": paymentAttrs});
     }
 }
 /*Using contruct proxy method for some IoC
