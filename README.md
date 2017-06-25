@@ -12,8 +12,8 @@ How to use it:
   var _instaPago = new instapago("[YOUR_API_KEY]", "[YOUR_PUBLIC_KEY]");
   
 var paymentPAHandler = function(params) {
-    //_instaPago.completePayment(params).then(res=>console.log("res.data", "resputa completePayment")).catch(err=>console.log(err, "completePayment error"));
-    _instaPago.getPaymentDetails(params).then(res => console.log("res.data", "resputa getPaymentDetails")).catch(err => console.log(err, "completePayment error"));
+    //_instaPago.completePayment(params).then(res=>console.log("res.data")).catch(err=>console.log(err, "completePayment error"));
+    _instaPago.getPaymentDetails(params).then(res => console.log("res.data")).catch(err => console.log(err, "completePayment error"));
     _instaPago.cancelPayment(params).then(res => console.log(res, "resputa cancelPayment")).catch(err => console.log(err, "completePayment error"));
 }
 eventEmitter.on('paymentPA', paymentPAHandler);
@@ -23,18 +23,18 @@ eventEmitter.on('paymentPA', paymentPAHandler);
 var payment = {
     "amount": 100,
     "description": "Test payment",
-    "cardHolder": "Maykol A Purica M",
-    "cardHolderId": "18111696",
+    "cardHolder": "John Doe",
+    "cardHolderId": "105682414",
     "cardNumber": "4111111111111111",
     "cvc": 621,
     "expirationDate": "07/2020",
     "statusId": 2,
-    "ip": "192.168.1.255",
+    "ip": "[YOUR_SERVER_IP]",
     "orderNumber": 1256,
-    "address": "Direccion de prueba",
+    "address": "Test Address",
     "city": "caracas",
     "zipCode": 1010,
-    "state": "Dtto Capital"
+    "state": "DC"
 }
 
 _instaPago.createPayment(payment, true)
