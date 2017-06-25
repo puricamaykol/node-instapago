@@ -3,7 +3,7 @@
 Node Instapago
 --------------
 
-Simple Instapago Client for NodeJs (On the works, still barebones... )
+Simple promise based [Instapago](http://instapago.com/) (payment service http://instapago.com/ ) Client for NodeJs.
 
 How to use it:
 
@@ -53,6 +53,7 @@ Methods
 The road ahead
 --------------
 
+ - Make it installable via NPM
  - Caching payments
  - Complete las pre authorized cached payments
  - Delete last cached payment
