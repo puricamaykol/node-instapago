@@ -1,6 +1,6 @@
 {
   "name": "node-instapago",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple Instapago Client for NodeJs",
   "main": "index.js",
   "dependencies": {
