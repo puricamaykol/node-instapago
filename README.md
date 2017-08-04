@@ -5,10 +5,20 @@ Node Instapago
 
 Simple promise based [Instapago](http://instapago.com/) (payment service http://instapago.com/ ) Client for NodeJs.
 
-How to use it:
+How to install
+--------------
+
+```batch
+    npm install node-instapago
+```
+
+
+How to use it
+--------------
 
 
 ```javascript
+  var instapago = require("instapago");  
   var _instaPago = new instapago("[YOUR_API_KEY]", "[YOUR_PUBLIC_KEY]");
   
 var paymentPAHandler = function(params) {
@@ -53,9 +63,9 @@ Methods
 The road ahead
 --------------
 
- - Make it installable via NPM
  - Caching payments
  - Complete las pre authorized cached payments
  - Delete last cached payment
+
 
 
