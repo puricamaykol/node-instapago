@@ -1,6 +1,5 @@
 'use strict'
 var axios = require('axios');
-var qa = require('qs');
 
 /**
  * Main Class

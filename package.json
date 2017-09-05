@@ -1,12 +1,10 @@
 {
   "name": "node-instapago",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple Instapago Client for NodeJs",
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.16.2",
-    "qs": "^6.4.0",
-    "request": "^2.81.0"
+    "axios": "^0.16.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
