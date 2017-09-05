@@ -60,13 +60,13 @@ class InstaPago {
      * @param  {json} paymentParameters Payment object containing payment id
      * @return {Promise}
      */
-    getPaymentDetails(paymentParameters) {
+    getPaymentDetails(paymentId) {
     	let paymentAttrs = {
             "KeyId": this._KeyId,
             "PublicKeyId": this._PublicKeyId,
-            "Id": paymentParameters.Id
+            "Id": paymentId
         }
-        return this._http('/payment?KeyId='+paymentAttrs.KeyId+'&PublicKeyId='+paymentAttrs.PublicKeyId+'&Id='+paymentParameters.Id);
+        return this._http('/payment?KeyId='+paymentAttrs.KeyId+'&PublicKeyId='+paymentAttrs.PublicKeyId+'&Id='+paymentId);
 
     }
     /**
@@ -74,11 +74,11 @@ class InstaPago {
      * @param  {json} paymentParameters paymentParameters Payment object containing payment id
      * @return {Promise}
      */
-    cancelPayment(paymentParameters) {
+    cancelPayment(paymentId) {
     	let paymentAttrs = {
             "KeyId": this._KeyId,
             "PublicKeyId": this._PublicKeyId,
-            "Id": paymentParameters.Id
+            "Id": paymentId
         }
         return this._http.delete('/payment',{"data": paymentAttrs});
     }

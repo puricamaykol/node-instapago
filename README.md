@@ -11,8 +11,32 @@ How to install
 ```batch
     npm install node-instapago
 ```
+API
+-------
+ - `constructor(String: apiKey, String:publicKey)`
+ - `createPayment(Payment: paymentParameters, Bool: ispreAuthorized) : Promise`
+ - `completePayment(Payment: paPaymentParameters) : Promise`
+ - `getPaymentDetails(String: paymentId) : Promise`
+ - `cancelPayment(String: paymentId) : Promise`
 
-
+```javascript
+PayMent =  {
+             amount,
+             description,
+             cardHolder,
+             cardHolderId,
+             cardNumber,
+             cvc,
+             expirationDate,
+             ip,
+             orderNumber,
+             address,
+             city,
+             zipCode,
+             state
+            }
+```
+ 
 How to use it
 --------------
 
@@ -52,20 +76,13 @@ _instaPago.createPayment(payment, true)
     .catch(err => console.log(err, "error"));
 ```
 
-Methods
--------
-
- - createPayment( )
- - completePayment( )
- - getPaymentDetails( )
- - cancelPayment( )
-
 The road ahead
 --------------
 
  - Caching payments
  - Complete las pre authorized cached payments
  - Delete last cached payment
+
 
 
 
